@@ -1,0 +1,11 @@
+﻿<button class="play_again_button" @onclick="OnClick">@title</button>
+
+@code {
+    
+        [Parameter]
+        public EventCallback OnClick { get; set; }
+
+        [Parameter]
+        public string? title { get; set; }
+    
+}

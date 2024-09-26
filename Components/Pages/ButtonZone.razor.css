@@ -1,0 +1,93 @@
+﻿
+.pickColor_section {
+    margin-top: 15rem;
+    height: 50%
+}
+
+
+
+/* css gérant la partie montrant l'historique des coups déjà effectuées */
+
+.historic_combination_colors {
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    column-gap: 5rem;
+    padding-left: 0%;
+}
+
+.played_color_div {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+
+
+
+
+/* css pour la partie de sélection des couleurs */
+
+
+.color_module_zone {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    column-gap: 0.5rem;
+}
+
+.color_module {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.color_panel {
+    height: 50px;
+    width: 50px;
+    border: 2px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+
+
+/* css pour boutton validant les choix de couleurs de l'utilisateur */
+
+.validation_buttonZone {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem
+}
+
+.validation_button {
+    font-weight: bold;
+    font-size: 22px
+
+}
+
+
+
+
+/* css pour la bannière de victoire */
+.victory_zone {
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: green;
+    padding: 2rem
+}
+
+.victory_zone_paragraph {
+    color: white;
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center
+}
+

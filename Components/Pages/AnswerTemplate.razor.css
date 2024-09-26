@@ -1,0 +1,29 @@
+﻿
+.section_hidden_answer {
+    margin-top: 4rem;
+    margin-bottom:2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5rem;
+    padding-left: 0%;
+}
+
+.section_hidden_answer_div {
+    width: 50px;
+    height: 50px;
+    background: grey;
+    border-radius: 10px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.section_hidden_answer_numbers {
+    font-weight: 700;
+    font-size: 25px;
+    margin-bottom: 0%;
+    margin-top : 0%;
+}

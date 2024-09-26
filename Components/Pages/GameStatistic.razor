@@ -1,0 +1,16 @@
+﻿<div class="paragraph_information_div">
+    <p class="paragraph_information">Nombre de couleurs trouvées : @comparedColor</p>
+    <p class="paragraph_information">Nombre de couleurs présentes au mauvais endroit: @containedColor</p>
+    <p class="paragraph_information">Voici le nombre de tentatives: @numberOfAttemps</p>
+</div>
+
+@code {
+    [Parameter]
+    public int comparedColor { get; set; }
+
+    [Parameter]
+    public int containedColor { get; set; }
+
+    [Parameter]
+    public int numberOfAttemps { get; set; }
+}

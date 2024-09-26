@@ -1,0 +1,174 @@
+﻿
+
+<section>
+    
+        @foreach (List<int> attempt in previousAttemps)
+        {
+            <ul class="historic_combination_colors">
+                @foreach (var result in attempt)
+                {
+
+                    <li>
+                        @{
+                            switch (result)
+                            {
+                                case 0:
+                                <div class="played_color_div" style="background-color:blue" ></div>
+                                    break;
+
+                                case 1:
+                                <div class="played_color_div" style="background-color:yellow"></div>
+                                    break;
+
+                                case 2:
+                                <div class="played_color_div" style="background-color:green"></div>
+                                    break;
+
+                                case 3:
+                                <div class="played_color_div" style="background-color:red"></div>
+                                    break;
+                                default:
+                                <div class="played_color_div" style="background-color:blue"></div>
+                                    break;
+
+                            }
+                        }
+                    </li>
+                }
+            </ul>
+    }
+    
+</section>
+
+
+<section class="pickColor_section">
+
+    
+    <div class="color_module_zone">
+
+        <div class="color_module" >
+            <button @onclick="() => HandleNextColor(0)">Couleur suivante</button>
+            <div class="color_panel" style=" background-color: @couleur[indexes[0]]"></div>
+            <button @onclick="() => HandlePreviousColor(0)">Couleur précédente</button>
+        </div>
+
+        <div class="color_module" >
+            <button @onclick="() => HandleNextColor(1)">Couleur suivante</button>
+            <div class="color_panel" style=" background-color: @couleur[indexes[1]]"></div>
+            <button @onclick="() => HandlePreviousColor(1)">Couleur précédente</button>
+        </div>
+
+        <div class="color_module" >
+            <button @onclick="() => HandleNextColor(2)">Couleur suivante</button>
+            <div class="color_panel" style=" background-color: @couleur[indexes[2]]"></div>
+            <button @onclick="() => HandlePreviousColor(2)">Couleur précédente</button>
+        </div>
+
+        <div class="color_module" >
+            <button @onclick="() => HandleNextColor(3)">Couleur suivante</button>
+            <div class="color_panel" style=" background-color: @couleur[indexes[3]]"></div>
+            <button @onclick="() => HandlePreviousColor(3)">Couleur précédente</button>
+        </div>
+
+        <div class="color_module" >
+            <button @onclick="() => HandleNextColor(4)">Couleur suivante</button>
+            <div class="color_panel" style="height: 50px; width: 50px; background-color: @couleur[indexes[4]]; margin-top: 10px; margin-bottom: 10px"></div>
+            <button @onclick="() => HandlePreviousColor(4)">Couleur précédente</button>
+        </div>
+
+    </div>
+
+    
+    <div class="validation_buttonZone">
+        @if (comparedColor == 5)
+        {
+            <button class="validation_button" disabled @onclick="handleAnswer" type="submit">Valider</button>
+        } else
+        {
+            <button class="validation_button" @onclick="handleAnswer" type="submit">Valider</button>
+        }
+        
+    </div>
+        
+    <GameStatistic comparedColor="@comparedColor" containedColor="@containedColor" numberOfAttemps="@numberOfAttemps"></GameStatistic>
+    @foreach( int number in goodNumbers)
+    {
+        <p>@number</p>
+    }
+
+
+    @if (comparedColor == 5)
+    {
+        <div class="victory_zone" >
+            <p class="victory_zone_paragraph">Vous avez gagné !! Félicitation !! Après @numberOfAttemps tentatives</p>
+
+            <ButtonClick OnClick="handleResetGame" title="Voulez-vous rejouer ?"></ButtonClick>
+        </div>
+    }
+        
+</section>
+
+@code {
+
+    List<string> couleur = new List<string> { "blue", "yellow", "green", "red" };
+    List<int> goodNumbers = new List<int>();
+    List<int> pickedColor = new List<int>();
+    List<int> resultTest = new List<int>();
+    List<List<int>> previousAttemps = new List<List<int>>();
+
+    int comparedColor;
+    int containedColor;
+    int[] indexes = new int[5] { 0, 0, 0, 0, 0 };
+    bool allNumberFound = false;
+    int numberOfAttemps = 0;
+
+    /// <summary>
+    /// Fonction permettant de gérer les réponses du joueur
+    /// </summary>
+    public void handleAnswer()
+    {
+
+        pickedColor.Clear();
+        pickedColor.AddRange(indexes);  
+        goodNumbers = GenerateRandomNumber(goodNumbers);
+        containedColor = ContainedColorComparator(pickedColor);
+        comparedColor = ColorComparator(pickedColor);
+        allNumberFound = IsAllNumberFound(comparedColor);
+        SavePreviousColors(pickedColor);
+
+        if (allNumberFound)
+        {
+            return;
+        } else
+        {
+            numberOfAttemps++;
+        }
+
+    }
+
+    /// <summary>
+    /// Fonction permettant de redémarrer une nouvelle partie
+    /// </summary>
+    public void handleResetGame()
+    {
+        pickedColor.Clear();
+        resultTest.Clear();
+        comparedColor = 0;
+        containedColor = 0;
+        previousAttemps.Clear();     
+        numberOfAttemps = 0;         
+        indexes = new int[5] { 0, 0, 0, 0, 0 };  
+        allNumberFound = false;
+        goodNumbers.Clear();
+    }
+
+    public void HandleNextColor(int i)
+    {
+        indexes[i] = (indexes[i] + 1) % couleur.Count;
+    }
+
+    public void HandlePreviousColor(int i)
+    {
+        indexes[i] = (indexes[i] - 1 + couleur.Count) % couleur.Count;
+    }
+}
